@@ -6,20 +6,20 @@ import numpy as np
 import sklearn.preprocessing as prep
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-
+from typing import Union
 from autoencoder_models.Autoencoder import Autoencoder
 
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 
-def standard_scale(X_train, X_test):
+def standard_scale(X_train, X_test) -> Union[int, int]:
     preprocessor = prep.StandardScaler().fit(X_train)
     X_train = preprocessor.transform(X_train)
     X_test = preprocessor.transform(X_test)
     return X_train, X_test
 
 
-def get_random_block_from_data(data, batch_size):
+def get_random_block_from_data(data, batch_size) -> dict:
     start_index = np.random.randint(0, len(data) - batch_size)
     return data[start_index:(start_index + batch_size)]
 
